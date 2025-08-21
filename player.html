@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎵 Team Music Player - Main Player</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container player-container">
+      <!-- Header -->
+      <div class="header">
+  <div class="header-left">
+      <h1>🎮 Team Music Player - Main Player</h1>
+      <p class="creator-credit">Created by Anon LK</p>
+  </div>
+  <div class="connection-status">
+      <span id="connection-status" class="status-connected">🟢 Connected as Main Player</span>
+      <button onclick="logout()" class="logout-btn">Logout</button>
+  </div>
+</div>
+
+      <!-- Error/Notification Area -->
+      <div id="notification-area" class="notification-area" style="display: none;">
+          <div id="notification-content" class="notification-content">
+              <span id="notification-message"></span>
+              <button onclick="hideNotification()" class="notification-close">✕</button>
+          </div>
+      </div>
+
+      <div class="player-layout">
+          <!-- Left Side: Now Playing & Controls -->
+          <div class="player-main">
+              <!-- Now Playing Section -->
+              <div class="now-playing-section">
+                  <h2>🎵 Now Playing</h2>
+                  <div id="current-song-display">
+                      <div class="song-artwork">
+                          <img id="current-artwork" src="/placeholder.svg?height=200&width=200" alt="Album Art">
+                      </div>
+                      <div class="song-info">
+                          <h3 id="current-title">No song playing</h3>
+                          <p id="current-artist">Add songs to get started</p>
+                          <p id="current-requester"></p>
+                      </div>
+                  </div>
+
+                  <!-- Progress Bar -->
+                  <div class="progress-section">
+                      <div class="progress-bar">
+                          <div class="progress-fill" id="progress-fill"></div>
+                      </div>
+                      <div class="time-display">
+                          <span id="current-time">0:00</span>
+                          <span id="total-time">0:00</span>
+                      </div>
+                  </div>
+
+                  <!-- Audio Player -->
+                  <div class="audio-player">
+                      <audio id="audioPlayer" onended="onSongEnded()" preload="metadata" 
+                             ontimeupdate="updateProgress()" onloadedmetadata="updateDuration()"></audio>
+                      
+                      <!-- Custom Controls -->
+                      <div class="custom-controls">
+                          <div class="playback-controls">
+                              <button id="playPauseButton" onclick="togglePlayPause()" class="control-btn">
+                                  ⏯️ Play
+                              </button>
+                              <button onclick="playNext()" class="control-btn">
+                                  ⏭️ Next
+                              </button>
+                              <button onclick="stopSong()" class="control-btn">
+                                  ⏹️ Stop
+                              </button>
+                          </div>
+                          
+                          <div class="volume-control">
+                              <span>🔊</span>
+                              <input type="range" id="volumeSlider" min="0" max="100" value="80" 
+                                     onchange="changeVolume(this.value)" class="volume-slider">
+                              <span id="volumeValue">80%</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!-- Search Section -->
+              <div class="search-section">
+                  <h2>🔍 Add Music</h2>
+                  <div class="search-type-selection" style="margin-bottom: 15px;">
+                      <label>
+                          <input type="radio" name="searchType" value="songs" checked> Music
+                      </label>
+                      <label style="margin-left: 20px;">
+                          <input type="radio" name="searchType" value="videos"> Videos
+                      </label>
+                  </div>
+                  <div class="search-bar">
+                      <input type="text" id="query" placeholder="Search for songs, artists, or albums..." 
+                             onkeydown="if(event.key === 'Enter') search()">
+                      <button onclick="search()" id="search-btn">Search</button>
+                  </div>
+                  <p id="search-loading" class="loading" style="display: none;">🔄 Searching...</p>
+
+                  <div class="search-results-container" id="search-results-container" style="display: none;">
+                      <h3>Search Results</h3>
+                      <div class="results-grid" id="search-results-grid"></div>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Right Side: Queue -->
+          <div class="queue-sidebar">
+              <div class="queue-header">
+                  <h2>📋 Queue</h2>
+                  <div class="queue-controls">
+                      <span id="queue-count" class="queue-count">0 songs</span>
+                      <button onclick="shuffleQueue()" class="queue-btn" title="Shuffle Queue">🔀</button>
+                      <button onclick="clearQueue()" class="queue-btn" title="Clear Queue">🗑️</button>
+                  </div>
+              </div>
+              
+              <div class="queue-container">
+                  <div id="queue-list"></div>
+                  <div class="queue-empty" id="queue-empty" style="display: none;">
+                      <p>🎼 Queue is empty</p>
+                      <p>Search and add some music!</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Remote Control Status -->
+      <div class="remote-status">
+          <h3>📱 Remote Control Status</h3>
+          <div class="online-users">
+              <span id="user-count">0 team members online</span>
+              <div id="user-list"></div>
+          </div>
+          <p class="help-text">Team members can control this player from their devices</p>
+      </div>
+  </div>
+
+  <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+  <script>
+      // Set this as main player
+      window.isMainPlayer = true;
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

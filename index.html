@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎵 Team Music Player - Remote Control</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+      <!-- Header -->
+      <div class="header">
+  <div class="header-left">
+      <h1>🎵 Team Music Player</h1>
+      <p class="creator-credit">Created by Anon LK</p>
+  </div>
+  <div class="user-info">
+      <div class="username-input">
+          <input type="text" id="username" placeholder="Enter your name" maxlength="20">
+          <button onclick="setUsername()">Set Name</button>
+          <button onclick="logout()" id="logout-btn" style="display: none;" class="logout-btn">Logout</button>
+      </div>
+      <div class="connection-info">
+          <div class="online-users">
+              <span id="user-count">0 online</span>
+              <div id="user-list"></div>
+          </div>
+          <div class="player-status">
+              <span id="main-player-status" class="status-disconnected">🔴 Main Player Offline</span>
+          </div>
+      </div>
+  </div>
+</div>
+
+      <!-- Now Playing Remote Control -->
+
+      <div class="main-content">
+  <!-- Left Side: Search Section -->
+  <div class="search-section">
+      <h2>🔍 Add Music to Queue</h2>
+      <div class="search-type-selection" style="margin-bottom: 15px;">
+          <label>
+              <input type="radio" name="searchType" value="songs" checked> Music
+          </label>
+          <label style="margin-left: 20px;">
+              <input type="radio" name="searchType" value="videos"> Videos
+          </label>
+      </div>
+      <div class="search-bar">
+          <input type="text" id="query" placeholder="Search for songs, artists, or albums..." 
+                 onkeydown="if(event.key === 'Enter') search()">
+          <button onclick="search()" id="search-btn">Search</button>
+      </div>
+      <p id="search-loading" class="loading" style="display: none;">🔄 Searching...</p>
+
+      <div class="search-results-container" id="search-results-container" style="display: none;">
+          <h3>Search Results</h3>
+          <div class="results-grid" id="search-results-grid"></div>
+      </div>
+  </div>
+
+  <!-- Right Side: Player and Queue -->
+  <div class="right-panel">
+      <!-- Remote Control Player -->
+      <div class="remote-control-section">
+          <h2>🎮 Remote Control</h2>
+          <div class="now-playing-remote">
+              <div class="remote-song-info">
+                  <img id="remote-artwork" src="/placeholder.svg?height=80&width=80" alt="Album Art" class="remote-thumbnail">
+                  <div class="remote-details">
+                      <h3 id="remote-title">No song playing</h3>
+                      <p id="remote-artist">Waiting for music...</p>
+                      <p id="remote-requester"></p>
+                  </div>
+              </div>
+              
+              <!-- Progress Bar -->
+              <div class="remote-progress">
+                  <div class="progress-bar">
+                      <div class="progress-fill" id="remote-progress-fill"></div>
+                  </div>
+                  <div class="time-display">
+                      <span id="remote-current-time">0:00</span>
+                      <span id="remote-total-time">0:00</span>
+                  </div>
+              </div>
+
+              <!-- Remote Controls -->
+              <div class="remote-controls">
+                  <button onclick="remoteTogglePlayPause()" id="remote-play-pause" class="remote-btn">
+                      ⏯️ Play
+                  </button>
+                  <button onclick="remotePlayNext()" class="remote-btn">
+                      ⏭️ Next
+                  </button>
+                  <button onclick="remoteStop()" class="remote-btn">
+                      ⏹️ Stop
+                  </button>
+              </div>
+
+              <!-- Volume Control -->
+              <div class="remote-volume">
+                  <span>🔊 Volume:</span>
+                  <input type="range" id="remote-volume-slider" min="0" max="100" value="80" 
+                         onchange="remoteChangeVolume(this.value)" class="volume-slider">
+                  <span id="remote-volume-value">80%</span>
+              </div>
+          </div>
+      </div>
+
+      <!-- Queue Section -->
+      <div class="queue-section">
+          <div class="queue-header">
+              <h2>📋 Queue</h2>
+              <div class="queue-controls">
+                  <span id="queue-count" class="queue-count">0 songs</span>
+                  <button onclick="shuffleQueue()" class="queue-btn" title="Shuffle Queue">🔀</button>
+                  <button onclick="clearQueue()" class="queue-btn" title="Clear Queue">🗑️</button>
+              </div>
+          </div>
+          
+          <div class="queue-container">
+              <div id="queue-list"></div>
+              <div class="queue-empty" id="queue-empty" style="display: none;">
+                  <p>🎼 Queue is empty. Search and add some music!</p>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+  <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+  <script>
+      // Set this as remote control
+      window.isMainPlayer = false;
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,850 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+/* Header layout improvements */
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.creator-credit {
+  font-size: 0.9em;
+  opacity: 0.8;
+  margin: 0;
+  font-style: italic;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2.2em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.connection-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.username-input {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.username-input input {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.username-input input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.online-users {
+  text-align: right;
+}
+
+#user-count {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+#user-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: flex-end;
+}
+
+.user-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8em;
+}
+
+.player-status {
+  margin-top: 5px;
+}
+
+.status-connected {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.status-disconnected {
+  color: #f44336;
+  font-weight: bold;
+}
+
+/* Main content layout for index page - new 2-column layout */
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 30px;
+  align-items: start;
+}
+
+/* Right panel container */
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Remote Control Section - now more compact */
+.remote-control-section {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+.remote-control-section h2 {
+  margin-top: 0;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+.now-playing-remote {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.remote-song-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.remote-thumbnail {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.remote-details h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.1em;
+}
+
+.remote-details p {
+  margin: 2px 0;
+  opacity: 0.8;
+  font-size: 0.9em;
+}
+
+.remote-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 10px 0;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50, #45a049);
+  width: 0%;
+  transition: width 0.3s ease;
+  border-radius: 5px;
+}
+
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85em;
+  opacity: 0.9;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+.remote-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.remote-btn {
+  background: linear-gradient(45deg, #2196f3, #1976d2);
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+}
+
+.remote-btn:hover {
+  background: linear-gradient(45deg, #1976d2, #1565c0);
+  transform: translateY(-2px);
+}
+
+.remote-volume {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  font-size: 0.9em;
+}
+
+.remote-volume .volume-slider {
+  width: 80px;
+}
+
+/* Queue section adjustments for right panel */
+.right-panel .queue-section {
+  flex: 1;
+}
+
+.right-panel .queue-container {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.right-panel .queue-header h2 {
+  font-size: 1.5em;
+}
+
+/* Search section - full height on left */
+.search-section {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  height: fit-content;
+  min-height: 600px;
+}
+
+.search-section h2 {
+  margin-top: 0;
+  font-size: 1.8em;
+  margin-bottom: 20px;
+}
+
+.results-grid {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+/* Player Layout for player page */
+.player-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+.player-main {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.queue-section,
+.now-playing-section {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+.queue-section h2,
+.now-playing-section h2 {
+  margin-top: 0;
+  font-size: 1.8em;
+  margin-bottom: 20px;
+}
+
+/* Now Playing Section */
+#current-song-display {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.song-artwork img {
+  width: 150px;
+  height: 150px;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.song-info h3 {
+  font-size: 1.8em;
+  margin: 0 0 10px 0;
+}
+
+.song-info p {
+  margin: 5px 0;
+  opacity: 0.8;
+}
+
+.progress-section {
+  margin-bottom: 20px;
+}
+
+.audio-player {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+#audioPlayer {
+  width: 100%;
+  margin-bottom: 20px;
+  height: 40px;
+}
+
+.custom-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.playback-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.volume-slider {
+  width: 100px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  outline: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Search Section */
+.search-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 16px;
+}
+
+.search-bar input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.search-results-container {
+  margin-top: 20px;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.search-result-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.search-result-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.result-thumbnail {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.result-title {
+  font-size: 0.9em;
+  margin: 0 0 5px 0;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.result-artist {
+  font-size: 0.8em;
+  margin: 0 0 5px 0;
+  opacity: 0.8;
+}
+
+.result-duration {
+  font-size: 0.7em;
+  margin: 0 0 10px 0;
+  opacity: 0.6;
+}
+
+/* Queue Section */
+.queue-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.queue-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.queue-count {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.8em;
+}
+
+.queue-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  padding: 5px 8px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.queue-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Queue Sidebar (for player page) */
+.queue-sidebar {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  height: fit-content;
+}
+
+.queue-sidebar .queue-header h2 {
+  font-size: 1.5em;
+}
+
+.queue-container {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.queue-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.queue-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.queue-position {
+  font-weight: bold;
+  color: #ffd700;
+  min-width: 25px;
+  text-align: center;
+}
+
+.queue-thumbnail {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.queue-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.queue-title {
+  font-weight: 500;
+  font-size: 0.9em;
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stream-status {
+  margin-right: 5px;
+}
+
+.queue-artist {
+  font-size: 0.8em;
+  opacity: 0.8;
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.queue-meta {
+  font-size: 0.7em;
+  opacity: 0.6;
+}
+
+.requester {
+  font-style: italic;
+}
+
+.remove-btn {
+  background: rgba(244, 67, 54, 0.8);
+  border: none;
+  padding: 5px 8px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.8em;
+}
+
+.remove-btn:hover {
+  background: rgba(244, 67, 54, 1);
+}
+
+.queue-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Remote Status Section */
+.remote-status {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  margin-top: 30px;
+}
+
+.remote-status h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.help-text {
+  font-size: 0.9em;
+  opacity: 0.8;
+  margin-top: 10px;
+}
+
+/* Logout button styling */
+.logout-btn {
+  background: linear-gradient(45deg, #f44336, #d32f2f);
+  padding: 6px 12px;
+  font-size: 0.8em;
+  margin-left: 10px;
+}
+
+.logout-btn:hover {
+  background: linear-gradient(45deg, #d32f2f, #c62828);
+}
+
+/* Buttons */
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  backdrop-filter: blur(5px);
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.add-btn {
+  background: linear-gradient(45deg, #4caf50, #45a049);
+  width: 100%;
+  margin-top: 5px;
+}
+
+.control-btn {
+  background: linear-gradient(45deg, #9c27b0, #7b1fa2);
+  padding: 10px 15px;
+  font-size: 0.9em;
+}
+
+.loading {
+  color: #ffd700;
+  font-style: italic;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .player-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .queue-sidebar {
+    order: -1;
+  }
+}
+
+/* Updated responsive design */
+@media (max-width: 768px) {
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+
+  .right-panel {
+    order: -1;
+  }
+
+  .search-section {
+    min-height: auto;
+  }
+
+  .results-grid {
+    max-height: 300px;
+  }
+
+  .right-panel .queue-container {
+    max-height: 250px;
+  }
+
+  .remote-song-info {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .remote-volume {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+/* Scrollbar styling */
+.results-grid::-webkit-scrollbar,
+.queue-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.results-grid::-webkit-scrollbar-track,
+.queue-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.results-grid::-webkit-scrollbar-thumb,
+.queue-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.results-grid::-webkit-scrollbar-thumb:hover,
+.queue-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Notification Area */
+.notification-area {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  max-width: 400px;
+  animation: slideIn 0.3s ease-out;
+}
+
+.notification-content {
+  background: rgba(244, 67, 54, 0.95);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.notification-content.success {
+  background: rgba(76, 175, 80, 0.95);
+}
+
+.notification-content.warning {
+  background: rgba(255, 193, 7, 0.95);
+  color: #333;
+}
+
+.notification-content.info {
+  background: rgba(33, 150, 243, 0.95);
+}
+
+.notification-message {
+  flex: 1;
+  font-weight: 500;
+}
+
+.notification-close {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.notification-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.notification-area.hiding {
+  animation: slideOut 0.3s ease-in forwards;
+}
+
+/* Mobile responsive notifications */
+@media (max-width: 768px) {
+  .notification-area {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+
+  .notification-content {
+    padding: 12px 15px;
+  }
+}
