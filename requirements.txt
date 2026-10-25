@@ -3,6 +3,6 @@ flask-cors==4.0.0
 flask-socketio==5.3.6
 ytmusicapi==1.7.0
 yt-dlp
-requests==2.31.0
+requests==2.33.0
 python-socketio==5.11.0
 python-engineio
